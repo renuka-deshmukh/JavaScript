@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+
+    <script src="Functions.js"></script>
+</head>
+
+<body>
+    <header>
+        <!-- place navbar here -->
+    </header>
+    <main>
+
+
+        <div class="container shadow p-4 mt-1">
+            <h1>Calculator</h1>
+            <input type="number" style="margin-bottom: 10px; border-radius: 5px; " id="n1" /> <br>
+            <input type="number" style="border-radius: 5px; " id="n2" /><br>
+            =
+            <span id="result"></span>
+            <br>
+
+            <button class="btn btn-success" onclick="addition()">+</button>
+            <button class="btn btn-success" onclick="substract()">-</button>
+            <button class="btn btn-success" onclick="multiply()">*</button>
+            <button class="btn btn-success" onclick="divide()">/</button>
+        </div>
+
+        <div class="container shadow p-4 mt-1">
+
+            <h1>Factorial</h1>
+            <input type="number" style="border-radius: 5px; height: 35px;" id="fact">
+            <button id="btnfact" class="btn btn-success" onclick="getNumber()">Check Factorial</button> <br>
+            =
+            <span id="factresult"></span>
+        </div>
+
+        <script>
+            let n1 = document.querySelector('#n1')
+            let n2 = document.querySelector('#n2')
+            let result1 = document.querySelector("#result")
+
+            function addition() {
+                num1 = Number(n1.value)
+                num2 = Number(n2.value)
+                result1.textContent = num1 + num2;
+
+            }
+            function substract() {
+                num1 = Number(n1.value)
+                num2 = Number(n2.value)
+                result1.textContent = num1 - num2;
+
+            }
+
+            function multiply() {
+                num1 = Number(n1.value)
+                num2 = Number(n2.value)
+                result1.textContent = num1 * num2;
+
+            }
+
+            function divide() {
+                num1 = Number(n1.value)
+                num2 = Number(n2.value)
+                if (num2 == 0) {
+                    console.log("Can't divide");
+                } else {
+                    result1.textContent = num1 / num2;
+                }
+            }
+
+        </script>
+
+
+
+    </main>
+    <footer>
+        <!-- place footer here -->
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+        </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
