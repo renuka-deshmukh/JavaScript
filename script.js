@@ -5,22 +5,22 @@ showResult = document.querySelector("#GetResult")
 
 taskArray = []
 
-function deleteTask(i){
-       console.log(i)
-       taskArray.splice(i, 1)
-       displayTask();
+function deleteTask(i) {
+    console.log(i)
+    taskArray.splice(i, 1)
+    displayTask();
 }
 
-function displayTask(){
+function displayTask() {
 
-    showResult.innerHTML = taskArray.map((t, index)=>`
+    showResult.innerHTML = taskArray.map((t, index) => `
                              <li>${t}
                              <button class="btn btn-danger py-2" onclick="deleteTask(${index})">Delete</button>
                              </li>
-    `).join ('')
+    `).join('')
 }
 
-function addNewtask(){
+function addNewtask() {
 
     newTask = findNewtask.value
     taskArray.push(newTask)
@@ -30,10 +30,10 @@ function addNewtask(){
 
 }
 
-function clearAlltasks(){
-         taskArray= [];
-         console.log(taskArray);
-         displayTask()
+function clearAlltasks() {
+    taskArray = [];
+    console.log(taskArray);
+    displayTask()
 
 }
 
@@ -120,3 +120,86 @@ function resetMarks() {
     displayMarks();
 
 }
+const findValue = document.querySelector("#getInput")
+const findResult = document.querySelector("#getResult")
+
+const ArrayDataset = ["Mango", "Banana", "Grapes", "Kivi", "Apple", "Watermelon", "Orange"];
+
+function searchValue() {
+
+    newValue = findValue.value
+    findValue.value = '';
+
+    let found = false;
+
+    for (let i = 0; i <= ArrayDataset.length; i++) {
+
+        if (newValue === ArrayDataset[i]) {
+            findResult.textContent = "Fruit found :" + newValue;
+            found = true;
+            break;
+        }
+        else {
+            findResult.textContent = "Fruit not found"
+        }
+    }
+}
+
+
+const findnum = document.querySelector("#AddNum")
+const even = document.querySelector("#evenOutput")
+const odd = document.querySelector("#oddOutput")
+let number = [];
+
+function addNumbers() {
+    val = Number(findnum.value);
+    number.push(val);
+    findnum.value = '';
+}
+
+function evenNumbers() {
+    const evenNums = number.filter(num => num % 2 === 0);
+    even.innerHTML = evenNums.join(", ");
+    odd.innerHTML = '';
+}
+
+function oddNumbers() {
+    const oddNums = number.filter(num => num % 2 !== 0);
+    odd.innerHTML = oddNums.join(", ");
+    even.innerHTML = '';
+}
+
+function clearAlltasks() {
+    number = [];
+    even.innerHTML = '';
+    odd.inerHTML = '';
+    findnum.value = '';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

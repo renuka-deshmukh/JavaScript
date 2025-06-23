@@ -41,6 +41,43 @@
 
 
         </div>
+        <div class="container p-2" style="background-color: rgb(122, 219, 118);">
+            <h1>Search Value</h1>
+            <div class="container w-50 m-3">
+                <input type="text" id="getInput" placeholder="Search Here" class="form-control py-2 my-2">
+                <button class="btn btn-dark" onclick="searchValue()">Search</button>
+                <div id="getResult"></div>
+            </div>
+        </div>
+
+        <div class="container p-2" style="background-color: rgb(219, 188, 217);">
+            <h1>Filter Even Odd numbers</h1>
+
+            <div class="container w-50 m-3">
+                <input type="number" id="AddNum" placeholder="Enter a number" class="form-control py-2 my-2">
+                <button class="btn btn-primary" onclick="addNumbers()">Add Number</button>
+                <button class="btn btn-primary" onclick="evenNumbers()">Even Numbers</button>
+                <button class="btn btn-primary" onclick="oddNumbers()">Odd Numbers</button>
+                <button class="btn btn-primary" onclick="clearAlltasks()">Clear All</button>
+            </div>
+
+            <div class="container mt-4">
+                <div class="row m-4">
+                    <h5 class="text-primary">Even Numbers</h5>
+                    <div class="border rounded p-4 bg-light" style="width: 300px;">
+                        <ul id="evenOutput" class="list-unstyled text-center"></ul>
+                    </div>
+                </div>
+
+                <div class="row m-4">
+                    <h5 class=" text-danger ">Odd Numbers</h5>
+                    <div class="border rounded p-4 bg-light" style="width: 300px;">
+                        <ul id="oddOutput" class="list-unstyled text-center"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
 
         <script src="./script.js"></script>
