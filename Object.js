@@ -103,8 +103,12 @@ let mycalculator = {
         newSecond = Number(findsecond.value)
         findfirst.value = '';
         findsecond.value = '';
-        let divide = newOne / newSecond;
-        result.innerHTML = `<strong>Result:<strong> ${divide}`
+        if (newSecond == 0) {
+            result.innerHTML = `<strong>Can't Divide<strong>`
+        } else {
+            let divide = newOne / newSecond;
+            result.innerHTML = `<strong>Result:<strong> ${divide}`
+        }
     }
 
 };
