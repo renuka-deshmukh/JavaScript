@@ -21,21 +21,13 @@ const products = [
         name: "jacket ",
         description:
             "Women’s jackets come in a wide variety of styles designed to suit every occasion.",
-        Category: "Women",
+        category: "Women",
         price: 799,
         image:
             "https://i5.walmartimages.com/asr/615808ac-253f-44cd-a69e-8d8d9fd47e91.27de1643230b368f4b426a731eb1e3b3.jpeg",
     },
     {
         id: 4,
-        name: "Jacket",
-        description: "Men Jacket for Summer",
-        category: "Men",
-        price: 899,
-        image: "https://m.media-amazon.com/images/I/41Z2ahq2rWL.jpg",
-    },
-    {
-        id: 5,
         name: "saree",
         description: "Janasya-Womens-Ethnic-Paithani-Unstitched saree",
         category: "women",
@@ -43,7 +35,7 @@ const products = [
         image: "https://m.media-amazon.com/images/I/81LE4e6CViL._SY741_.jpg",
     },
     {
-        id: 6,
+        id: 5,
         name: "saree",
         description: "Pure Soft Silk With gold jari",
         category: "Women",
@@ -52,7 +44,7 @@ const products = [
             "https://wholetex.sgp1.cdn.digitaloceanspaces.com/full/mor-bangadi-paithani-silk-handloom-saree-1545.jpg",
     },
     {
-        id: 7,
+        id: 6,
         name: "T-Shirt",
         description:
             "KOTTY Women's Solid Slim Fit T-Shirt - Classic Round Neck, Stretchable Cotton Tee",
@@ -61,7 +53,7 @@ const products = [
         image: "https://m.media-amazon.com/images/I/61hLb3DSS4L._SY741_.jpg",
     },
     {
-        id: 8,
+        id: 7,
         name: "T-shirt",
         description: "Cotrasen Men's T-Shirts Cotton Short Sleeve T Shirts for Men",
         category: "Men",
@@ -69,7 +61,7 @@ const products = [
         image: "https://m.media-amazon.com/images/I/81S+B6F1WnL._AC_SX569_.jpg",
     },
     {
-        id: 9,
+        id: 8,
         name: "Saree",
         description: "Pink Span Cotton Jacquard Woven Saree",
         category: "Women",
@@ -78,7 +70,7 @@ const products = [
             "https://i.pinimg.com/736x/4a/b9/52/4ab952a8d036a66c047c91350b2b17a5.jpg",
     },
     {
-        id: 10,
+        id: 9,
         name: "Nike T-Shirt",
         description:
             "Fabric Description : Single Jersey - Classic, lightweight jersey fabric comprising 100% cotton.",
@@ -111,13 +103,11 @@ const cartLengthElmt = document.querySelector("#cartLength");
 
 function addToCart(p_id) {
     console.log("*****", p_id);
-    index = products.findIndex((p) => p.id == p_id);
+    let index = products.findIndex((p) => p.id == p_id);
     console.log(index);
-    prod_cart = products[index];
+    let prod_cart = products[index];
     cartFromLocal = localGetCart();
-
     cartFromLocal.push(prod_cart);
-
     //     newCartProd = products.filter((p)=> p.id == p_id)
     // console.log(newCartProd);
     // cart.push(newCartProd[0])
@@ -125,13 +115,28 @@ function addToCart(p_id) {
     // cartProdByFind = products.find((p)=> p.id == p_id)
     // console.log(cartProdByFind,"cartProdByFind");
     // cart.push(cartProdByFind);
-
-    cartLength = cartFromLocal.length;
-    cartLengthElmt.textContent = cartLength;
     console.log(cart);
     localSaveCart(cartFromLocal);
+    cartLength = localGetCart();
+    cartLengthElmt.textContent = cartLength.length;
     renderCart();
 }
+
+function deleteFromCart(p_id) {
+    console.log("product Id", p_id)
+    pIndex = products.findIndex((p) => p.id == p_id);
+    console.log("index", pIndex);
+    prod_cart = products[pIndex]
+    cartFromLocal = localGetCart();
+    cartFromLocal.splice(pIndex, 1);
+    console.log(cartFromLocal);
+    localSaveCart(cartFromLocal);
+    renderCart();
+
+}
+
+
+
 
 function renderProducts(productsRender = products) {
     // const productsRender1 = localGetProducts();
@@ -171,9 +176,9 @@ function renderCart() {
                               <th scope="row">${i}</th>
                               <td>${p.name}</td>
                               <td>${p.price}</td>
-                              <td><button class="btn btn-danger" >Remove from cart</button></td>
+                              <td><button class="btn btn-danger" onclick="deleteFromCart(${p.id})" >Remove from cart</button></td>
                             </tr>
-    `);
+    `).join("");
 }
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -189,4 +194,7 @@ window.addEventListener("DOMContentLoaded", () => {
     if (cartTableElmt) {
         renderCart();
     }
+    cartLength = localGetCart();
+    cartLengthElmt.textContent = cartLength.length;
+
 });
