@@ -29,7 +29,10 @@
                             <a class="nav-link active" aria-current="page" href="#">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Products</a>
+                            <button type="button" class="nav-link" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                                Add Product
+                            </button>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -61,6 +64,66 @@
         <div class="container">
             <div class="row" id="addProducts"></div>
         </div>
+
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="pName" class="form-label">Product Name</label>
+                                <input type="text" class="form-control" id="pName">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="pDescription" class="form-label">Product Description</label>
+                                <input type="text" class="form-control" id="pDescription">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="pImage" class="form-label">Product Image</label>
+                                <input type="text" class="form-control" id="pImage">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="pCategory" class="form-label">Product Category</label>
+                                <input type="text" class="form-control" id="pCategory">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="pPrice" class="form-label">Product Price</label>
+                                <input type="text" class="form-control" id="pPrice">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="AddNewProduct()">Add New Product</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <script src="./script.js"></script>
     </main>
