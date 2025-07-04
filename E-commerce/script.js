@@ -90,56 +90,75 @@ function localGetCart() {
     return JSON.parse(localStorage.getItem("cart51"));
 }
 
-function localSaveProducts() {
-    localStorage.setItem("products51", JSON.stringify(products));
+function localSaveProducts(p = products) {
+    localStorage.setItem("products51", JSON.stringify(p));
 }
 
 function localGetProducts() {
     return JSON.parse(localStorage.getItem("products51"));
 }
 
+
+pNameElmt = document.querySelector("#pName");
+pDescriptionElmt = document.querySelector("#pDescription");
+pImageElmt = document.querySelector("#pImage");
+pCategoryElmt = document.querySelector("#pCategory");
+pPriceElmt = document.querySelector("#pPrice")
+
+function AddNewProduct() {
+
+    newProductName = pNameElmt.value;
+    newProductDescription = pDescriptionElmt.value;
+    newProductImage = pImageElmt.value;
+    newProductCategory = pCategoryElmt.value;
+    newProductPrice = pPriceElmt.value;
+
+    newProduct = {
+        id: Date.now(),
+        name: newProductName,
+        description: newProductDescription,
+        category: newProductCategory,
+        price: Number(newProductPrice),
+        image: newProductImage,
+    }
+
+    console.log(newProduct);
+    p_data = localGetProducts()
+    p_data.push(newProduct)
+    localSaveProducts(p_data)
+
+    renderProducts();
+
+}
+
+
 const addproductsElmt = document.querySelector("#addProducts");
 const cartLengthElmt = document.querySelector("#cartLength");
+const totalPriceElmt = document.querySelector("#totalPrice")
 
 function addToCart(p_id) {
-    console.log("*****", p_id);
-    let index = products.findIndex((p) => p.id == p_id);
-    console.log(index);
-    let prod_cart = products[index];
-    cartFromLocal = localGetCart();
-    cartFromLocal.push(prod_cart);
-    //     newCartProd = products.filter((p)=> p.id == p_id)
-    // console.log(newCartProd);
-    // cart.push(newCartProd[0])
 
-    // cartProdByFind = products.find((p)=> p.id == p_id)
-    // console.log(cartProdByFind,"cartProdByFind");
-    // cart.push(cartProdByFind);
+    console.log("*****", p_id);
+    p_data1 = localGetProducts()
+    index = p_data1.findIndex((p) => p.id == p_id);
+    console.log(index);
+    prod_cart = p_data1[index];
+    cartFromLocal = localGetCart();
+
+    cartFromLocal.push(prod_cart);
+
+    cartLength = cartFromLocal.length;
+    cartLengthElmt.textContent = cartLength;
     console.log(cart);
     localSaveCart(cartFromLocal);
-    cartLength = localGetCart();
-    cartLengthElmt.textContent = cartLength.length;
-    renderCart();
-}
+    const productsRender = localGetProducts();
 
-function deleteFromCart(p_id) {
-    console.log("product Id", p_id)
-    pIndex = products.findIndex((p) => p.id == p_id);
-    console.log("index", pIndex);
-    prod_cart = products[pIndex]
-    cartFromLocal = localGetCart();
-    cartFromLocal.splice(pIndex, 1);
-    console.log(cartFromLocal);
-    localSaveCart(cartFromLocal);
-    renderCart();
+    renderCart(productsRender);
+
 
 }
 
-
-
-
-function renderProducts(productsRender = products) {
-    // const productsRender1 = localGetProducts();
+function renderProducts(productsRender = localGetProducts()) {
     addproductsElmt.innerHTML = productsRender
         .map(
             (product, index) => `
@@ -165,6 +184,17 @@ function renderProducts(productsRender = products) {
         .join("");
 }
 
+
+function deleteFromCart(p_id) {
+    cartFromLocalArray = localGetCart();
+    // console.log("product Id", p_id)
+    const pIndex = cartFromLocalArray.findIndex((p) => p.id == p_id);
+    cartFromLocalArray.splice(pIndex, 1);
+    localSaveCart(cartFromLocalArray);
+    renderCart();
+
+}
+
 const cartTableElmt = document.querySelector("#cartTable");
 
 function renderCart() {
@@ -173,12 +203,20 @@ function renderCart() {
     cartTableElmt.innerHTML = cartFromLocal.map(
         (p, i) => `
                             <tr>
-                              <th scope="row">${i}</th>
+                              <th scope="row">${i + 1}</th>
                               <td>${p.name}</td>
                               <td>${p.price}</td>
                               <td><button class="btn btn-danger" onclick="deleteFromCart(${p.id})" >Remove from cart</button></td>
                             </tr>
     `).join("");
+
+    let totalPrice = 0;
+    for (let i = 0; i < cartFromLocal.length; i++) {
+        console.log(totalPrice)
+        totalPrice += cartFromLocal[i].price
+    }
+
+    totalPriceElmt.textContent = totalPrice;
 }
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -198,3 +236,11 @@ window.addEventListener("DOMContentLoaded", () => {
     cartLengthElmt.textContent = cartLength.length;
 
 });
+
+// newCartProd = products.filter((p)=> p.id == p_id)
+// console.log(newCartProd);
+// cart.push(newCartProd[0])
+
+// cartProdByFind = products.find((p)=> p.id == p_id)
+// console.log(cartProdByFind,"cartProdByFind");
+// cart.push(cartProdByFind);
